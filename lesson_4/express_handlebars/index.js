@@ -14,7 +14,7 @@ const articles = [
 ];
 
 app.get('/', (req, res) => {
-    res.render('home', { title: 'home', articles });
+    res.render('home', { layout: 'index', title: 'home', articles });
 });
 
 app.listen(3000);
