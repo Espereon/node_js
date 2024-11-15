@@ -5,6 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+<<<<<<< HEAD
+=======
+  "keywords": [],
+>>>>>>> 429710bf8583962d7cd84548681a15d391e3c294
   "author": "",
   "license": "ISC",
   "description": "",
