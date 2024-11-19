@@ -9,13 +9,13 @@ const data = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
 let uniqueID = 0;
 const app = express();
 
-const users = [];
 
 const readUsersFromFile = () => {
     const data = fs.readFileSync(dataFilePath, 'utf-8');
     return JSON.parse(data);
 };
-
+const users = readUsersFromFile();
+uniqueID = users.reduce((maxId, user) => Math.max(maxId, user.id), 0);
 const writeUsersToFile = (users) => {
     fs.writeFileSync(dataFilePath, JSON.stringify(users, null, 2), 'utf-8');
 };
@@ -35,7 +35,7 @@ app.get('/users', (req, res) => {
 */
 app.get('/users/:id', checkParams(idUser), (req, res) => {
     const users = readUsersFromFile();
-    const user = articles.find((user) => user.id === Number(req.param.id));
+    const user = users.find((user) => user.id === Number(req.params.id));
 
     if (user) {
         res.send({ user })
@@ -87,7 +87,7 @@ app.delete('/users/:id', (req, res) => {
         writeUsersToFile(newUsers);
         res.send({ newUsers });
     } else {
-        res.status(404);
+        res.status(400);
         res.send({ user: null });
     }
 });
